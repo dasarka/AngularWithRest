@@ -1,0 +1,34 @@
+<!-- File: chapter6/public/http-get-example.html -->
+<html ng-app="demo">
+<head>
+<title>ANGULAR & REST</title>
+<style>
+.item {
+padding: 10px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body ng-controller="welcome">
+<h1>Hello Servers!</h1>
+<p>Title- {{item.key1}}</p>
+<p>SubTitle- {{item.key2}}</p>
+</div>
+
+</script>
+<script>
+angular.module('demo', [])
+	.controller('welcome', function($scope,$http) {
+		var self = this;
+		$http.get('http://localhost:8080/AngularWithRest/RestCall/Welcome/JSON')
+			.then(function(response) {
+				console.log(response.data);
+				$scope.item = response.data;
+				}, 
+			function(errResponse) {
+				console.error('Error while fetching notes');
+			});
+	});
+</script>
+</body>
+</html>
